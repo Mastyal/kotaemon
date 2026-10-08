@@ -50,16 +50,16 @@ def fake_docling(monkeypatch):
         ),
         "docling.document_converter": ModuleType("docling.document_converter"),
     }
-    modules["docling.datamodel.base_models"].InputFormat = InputFormat
+    setattr(modules["docling.datamodel.base_models"], "InputFormat", InputFormat)
     pipeline_options = modules["docling.datamodel.pipeline_options"]
-    pipeline_options.EasyOcrOptions = EasyOcrOptions
-    pipeline_options.OcrMacOptions = OcrMacOptions
-    pipeline_options.PdfPipelineOptions = PdfPipelineOptions
-    pipeline_options.TesseractCliOcrOptions = TesseractCliOcrOptions
-    pipeline_options.TesseractOcrOptions = TesseractOcrOptions
+    setattr(pipeline_options, "EasyOcrOptions", EasyOcrOptions)
+    setattr(pipeline_options, "OcrMacOptions", OcrMacOptions)
+    setattr(pipeline_options, "PdfPipelineOptions", PdfPipelineOptions)
+    setattr(pipeline_options, "TesseractCliOcrOptions", TesseractCliOcrOptions)
+    setattr(pipeline_options, "TesseractOcrOptions", TesseractOcrOptions)
     document_converter = modules["docling.document_converter"]
-    document_converter.DocumentConverter = DocumentConverter
-    document_converter.PdfFormatOption = PdfFormatOption
+    setattr(document_converter, "DocumentConverter", DocumentConverter)
+    setattr(document_converter, "PdfFormatOption", PdfFormatOption)
 
     for name, module in modules.items():
         monkeypatch.setitem(sys.modules, name, module)
